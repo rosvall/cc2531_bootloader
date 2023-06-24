@@ -34,11 +34,12 @@ stack:	.ds 1
 reset:
 	ajmp	bootloader
 interrupt_table:
+fwimg = 0x800 ; Start of application firmware
 n = 0
 .rept 18
 	.org 3 + 8*n
 	; Jump to app image interrupt table
-	ljmp . + APPIMG_OFFSET
+	ljmp . + fwimg
 	n = n + 1
 .endm
 
@@ -107,7 +108,7 @@ boot_app::
 	; reset to default clk settings
 	mov CLKCONCMD, #CLKCONCMD_DEFAULTS
 
-	ljmp APPIMG_OFFSET
+	ljmp fwimg
 
 
 button_pressed:

@@ -6,9 +6,6 @@
 USB_VID       = 0x1608
 USB_PID       = 0xffff
 
-; Flash/code address space start of actual firmware
-APPIMG_OFFSET = 0x800
-
 ; DFU detach timeout
 DETACH_TIMEOUT = 100
 
