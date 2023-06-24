@@ -18,7 +18,7 @@ The interrupt table in the bootloader is filled with jumps to the corresponding 
 
 Note that the bootloader enables the watchdog with a timeout of 250 ms! This means your firmware must periodically feed the watchdog (it can't be disabled), or the device will reboot to DFU mode.
 
-In DFU mode, it presents itself af a USB DFU 1.1 device to the USB host and allows both download (flashing) and upload (reading) for all flash from 0x800 and up.
+In DFU mode, it presents itself af a USB DFU 1.1 device to the USB host and allows both download (flashing) and upload (reading) for all flash from 0x800 and up. It will not overwrite itself though.
 
 To read or write flash, use a program like [dfu-util](https://sourceforge.net/projects/dfu-util/).
 
@@ -34,4 +34,8 @@ Just run `make` to build the raw binary image bootloader.bin
 
 It is not completely conformant to either USB 1.1 or DFU 1.1, and is only tested on Linux using dfu-utils.
 
-Feel free to submit a bug or pull request.
+It's currently using USB vendor id 0x1608 (Inside Out Networks), which is listed as "obsolete" by USB IF. This can be changed in `config.inc`. I'd like ideas for a better solution.
+
+It's written in 8051 assembler. This is on purpose, though. It started out written in C (using SDCC), but i quickly grew tired of trying to get SDCC to generate sensible code.
+
+*Feel free to submit a bug or pull request.*
