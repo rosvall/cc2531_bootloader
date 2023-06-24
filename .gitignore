@@ -1,0 +1,8 @@
+*.ihx
+*.bin
+*.rst
+*.lst
+*.mem
+*.map
+*.sym
+git_version.inc

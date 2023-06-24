@@ -1,0 +1,3 @@
+[submodule "bsp"]
+	path = bsp
+	url = git@github.com:rosvall/cc2531_bsp_asm.git
