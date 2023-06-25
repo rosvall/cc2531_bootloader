@@ -1,3 +1,4 @@
+*.rel
 *.ihx
 *.bin
 *.rst
