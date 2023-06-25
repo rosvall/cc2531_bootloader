@@ -63,8 +63,8 @@ dma_desc_tx:
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .area XSEG (XDATA,ABS)
-
 .org 0x0000
+
 string_descriptor:
 	string_desc_bLen:  .ds 1
 	string_desc_bType: .ds 1

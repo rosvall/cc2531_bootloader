@@ -9,7 +9,7 @@
 .endm
 
 .macro .print str
-	acall print
+	acall print_str_inline
 	.strz "'str"
 .endm
 

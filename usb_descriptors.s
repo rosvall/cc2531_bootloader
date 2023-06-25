@@ -112,7 +112,7 @@ render_str_serialnum::
 	; stored as little endian, read MSB first
 	mov r0, #(INFOPAGE_PERM_ADDR + 7)
 
-	; 16 ascii chars
+	; 16 ascii characters
 	mov b, #16
 	1$:
 		movx a, @r0
@@ -121,13 +121,7 @@ render_str_serialnum::
 			dec r0
 		2$:
 		swap a
-
-		; Convert a to ascii hex char
-		anl a, #0x0f
-		add a, #0x90
-		da a
-		addc a, #0x40
-		da a
+		acall hex_to_ascii
 
 		movx @dptr, a
 		inc dptr

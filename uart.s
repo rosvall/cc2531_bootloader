@@ -13,44 +13,34 @@
 .area CSEG (CODE)
 
 uart_setup::
-	; 2Mbaud 1N8 uart log output on P1.6
-	mov P1SEL, #(1 << UART_TX_PIN)
-	mov PERCFG, #PERCFG_U1_ALT2
-	setb U1CSR_UART_MODE
-	mov U1BAUD, #U1BAUD_BAUD_M_2000000 
-	mov U1GCR, #U1GCR_BAUD_E_2000000 
+	; 2 Mbaud 1N8 uart log output on P1.6
+
+	mov P1SEL, #(1 << UART_TX_PIN)     ; Enable peripheral function on P1.6
+	mov PERCFG, #PERCFG_U1_ALT2        ; Use i/o location 2 for USART1
+	setb U1CSR_UART_MODE               ; Set mode to UART (not SPI)
+	mov U1BAUD, #U1BAUD_BAUD_M_2000000 ; Baud mantissa
+	mov U1GCR, #U1GCR_BAUD_E_2000000   ; Baud exponent
 	ret
 
 
-print::
+print_str_inline::
 	; Print the null-terminated string following the call site,
 	; and return to instruction following the null byte.
 
 	; Pop "return" address = address of first char of null-terminated string
 	pop dph
 	pop dpl
+	; We'll assume the first character is not null
 	clr a
 	movc a, @a+dptr
 	print_loop:
-		mov U1DBUF, a
-		jb U1CSR_ACTIVE, .
+		acall output_char
 		inc dptr
 		clr a
 		movc a, @a+dptr
 	jnz print_loop
 	; dptr now points one past the null byte
 	jmp @a+dptr
-
-
-print_hex_nybble:
-	anl a, #0x0f
-	add a, #0x90
-	da a
-	addc a, #0x40
-	da a
-	mov U1DBUF, a
-	jb U1CSR_ACTIVE, .
-	ret
 
 
 print_hex::
@@ -68,7 +58,13 @@ print_hex::
 		acall print_hex_nybble
 	djnz r0, print_hex_loop
 
-	mov U1DBUF, #'\n
-	jb U1CSR_ACTIVE, .
+	mov a, #'\n
+	ajmp output_char
 
+
+print_hex_nybble:
+	acall hex_to_ascii
+output_char:
+	mov U1DBUF, a
+	jb U1CSR_ACTIVE, .
 	ret

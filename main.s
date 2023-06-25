@@ -60,8 +60,8 @@ bootloader::
 	acall uart_setup
 
 	; Show banner with version
-	acall print
-	.str "Bootloader "
+	acall print_str_inline
+	.str "\nBOOTLOADER "
 	.str_version
 	.strz "\n"
 
