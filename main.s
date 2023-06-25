@@ -29,7 +29,7 @@ stack:	.ds 1
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 .area HOME (CODE,ABS)
-	.org 0x0
+.org 0x0
 
 reset:
 	ajmp	bootloader
@@ -38,14 +38,14 @@ fwimg = 0x800 ; Start of application firmware
 n = 0
 .rept 18
 	.org 3 + 8*n
-	; Jump to app image interrupt table
+	; Jump to entry in app image interrupt table
 	ljmp . + fwimg
 	n = n + 1
 .endm
 
 
 bootloader::
-        mov sp, #stack - 1
+	mov sp, #stack - 1
 
 	; Set up clock
 	mov a, #CLKSPD_32M
