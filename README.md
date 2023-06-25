@@ -39,3 +39,9 @@ It's currently using USB vendor id 0x1608 (Inside Out Networks), which is listed
 It's written in 8051 assembler. This is on purpose, though. It started out written in C (using SDCC), but i quickly grew tired of trying to get SDCC to generate sensible code.
 
 *Feel free to submit a bug or pull request.*
+
+### References
+ - [CC253x/4x User's Guide (Rev. D)](https://www.ti.com/lit/pdf/swru191)
+ - [8051 Instruction Set](https://www.win.tue.nl/~aeb/comp/8051/set8051.html)
+ - [Universal Serial Bus Device Class Specification for Device Firmware Upgrade](https://www.usb.org/sites/default/files/DFU_1.1.pdf)
+ - [USB 2.0 Specification](https://www.usb.org/sites/default/files/usb_20_20230224.zip)
