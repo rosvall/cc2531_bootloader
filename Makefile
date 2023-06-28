@@ -24,7 +24,6 @@ VERSION      = $(TAG:v%=%)
 VERSION_PARTS := $(subst ., ,$(VERSION))
 VERSION_MAJOR := $(word 1, $(VERSION_PARTS))
 VERSION_MINOR := $(word 2, $(VERSION_PARTS))
-
 ifneq ($(COMMIT),$(TAG_COMMIT))
 	VERSION := $(VERSION)-next-$(COMMIT)-$(DATE)
 endif
@@ -34,7 +33,6 @@ endif
 ifneq ($(shell git status --porcelain -uno),)
 	VERSION := $(VERSION)-dirty
 endif
-
 DEFINES  += -DGIT_VERSION_STR="\"$(VERSION)\""
 DEFINES  += -DGIT_VERSION_MAJOR=$(VERSION_MAJOR)
 DEFINES  += -DGIT_VERSION_MINOR=$(VERSION_MINOR)
@@ -55,10 +53,10 @@ CPPFLAGS += -P $(DEFINES)
 
 .PHONY: all info reset flash clean
 
-info: $(MEM_FILE)
-	@cat $(MEM_FILE)
-
 all: info $(BIN_FILE)
+
+info: $(MEM_FILE)
+	cat $(MEM_FILE)
 
 flash: $(BIN_FILE)
 	# My own hacked-together ESP32 based flasher
