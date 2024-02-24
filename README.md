@@ -10,7 +10,7 @@ If either
  - clockloss is detected,
  - or a button is held while booting
 
-it enters DFU (USB device firmware upgrade) mode. Otherwise it jumps to code address 0x800 to boot the your actual application firmware.
+it enters DFU (USB device firmware upgrade) mode. Otherwise it jumps to code address 0x800 to boot your actual application firmware.
 
 As the bootloader resides in the first 2 kB of the code address space, any firmware used with this bootloader must be compiled with code addresses offset by +0x800.
 
