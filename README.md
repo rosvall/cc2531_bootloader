@@ -1,3 +1,8 @@
+> [!NOTE]
+> Moved to [codeberg.org/rosvall/cc2531_bootloader](https://codeberg.org/rosvall/cc2531_bootloader)
+>
+> For reasons given [here](https://github.com/rosvall/goodbye-github)
+
 # Simple USB DFU bootloader for TI CC2531
 
 *See [this hack](https://github.com/rosvall/cc2531_oem_flasher) for how to flash a stock CC2531USB-RD dongle*
